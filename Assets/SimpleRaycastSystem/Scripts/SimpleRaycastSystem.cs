@@ -6,7 +6,6 @@ public static class SimpleRaycastSystem
 {
     private static List<SimpleRayCastable> _SimpleRayCastables = new List<SimpleRayCastable>();
     private static List<SimpleRaycastHit> _CurrentHitsBuffer = new List<SimpleRaycastHit>();
-    
     public static bool Raycast (Ray ray, out SimpleRaycastHit hit)
     {
         IEnumerable<SimpleRaycastHit> hits;
@@ -27,7 +26,7 @@ public static class SimpleRaycastSystem
         {
             if (simpleRayCastable.CheckIntersection(ray))
             {
-                _CurrentHitsBuffer.Add(new SimpleRaycastHit(simpleRayCastable));
+                _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable));
             }
         }
         if (_CurrentHitsBuffer.Count == 0)
@@ -35,7 +34,7 @@ public static class SimpleRaycastSystem
             hits = null;
             return false;
         }
-        hits = _CurrentHitsBuffer.OrderBy( hit => Vector3.Distance(hit.transform.position, ray.origin));
+        hits = _CurrentHitsBuffer.OrderBy( hit => hit.distance);
         return true;
     }
     public static void Register (SimpleRayCastable simpleRayCastable)

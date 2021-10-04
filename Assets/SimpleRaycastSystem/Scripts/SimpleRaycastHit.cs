@@ -6,9 +6,11 @@ public struct SimpleRaycastHit
 {
 	public Transform transform;
 	public SimpleRayCastable collider;
-	public SimpleRaycastHit (SimpleRayCastable simpleRayCastable)
+	public float distance;
+	public SimpleRaycastHit (Ray ray, SimpleRayCastable simpleRayCastable)
 	{
 		transform = simpleRayCastable.transform;
 		collider = simpleRayCastable;
+		distance = Vector3.Distance(transform.position, ray.origin);
 	}
 }
