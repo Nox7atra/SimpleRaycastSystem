@@ -10,18 +10,10 @@ public class SimpleBoxCollider : SimpleRayCastable
     {
         _transform = transform;
     }
-    
-    private void OnDrawGizmosSelected ()
-    {
-        Gizmos.color = Color.yellow;
-        var matrix = transform.localToWorldMatrix;
-        var pos = matrix.MultiplyPoint3x4(center);
-        var scale = matrix.MultiplyVector(size / 2)* 2;
-    
-        Gizmos.DrawWireCube(pos, scale);
-    }
+
     public override bool CheckIntersection (Ray ray)
-    {var matrix = transform.localToWorldMatrix;
+    {
+        var matrix = transform.localToWorldMatrix;
         var rpos = ray.origin;
         var rdir =  ray.direction;
         var pos = matrix.MultiplyPoint3x4(center);
@@ -52,8 +44,14 @@ public class SimpleBoxCollider : SimpleRayCastable
             (min - origin) / direction
         );
     }
-    public override void HandleRaycast()
+    
+    private void OnDrawGizmosSelected ()
     {
-        
+        Gizmos.color = Color.yellow;
+        var matrix = transform.localToWorldMatrix;
+        var pos = matrix.MultiplyPoint3x4(center);
+        var scale = matrix.MultiplyVector(size / 2)* 2;
+    
+        Gizmos.DrawWireCube(pos, scale);
     }
 }

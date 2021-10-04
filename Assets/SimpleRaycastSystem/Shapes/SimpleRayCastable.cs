@@ -6,12 +6,11 @@ public abstract class SimpleRayCastable : MonoBehaviour
 	{
 		SimpleRaycastSystem.Register(this);
 	}
-	protected void OnDisable ()
+	protected virtual void OnDisable ()
 	{
 		SimpleRaycastSystem.OnRelease(this);
 	}
 
-	public abstract bool CheckIntersection (Ray raycaster);
+	public abstract bool CheckIntersection (Ray ray);
 
-	public abstract void HandleRaycast ();
 }
