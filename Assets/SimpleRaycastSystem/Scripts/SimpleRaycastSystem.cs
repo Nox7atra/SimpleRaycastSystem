@@ -24,9 +24,9 @@ public static class SimpleRaycastSystem
         _CurrentHitsBuffer.Clear();
         foreach (var simpleRayCastable in _SimpleRayCastables)
         {
-            if (simpleRayCastable.CheckIntersection(ray))
+            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition))
             {
-                _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable));
+                _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable, hitPosition));
             }
         }
         if (_CurrentHitsBuffer.Count == 0)

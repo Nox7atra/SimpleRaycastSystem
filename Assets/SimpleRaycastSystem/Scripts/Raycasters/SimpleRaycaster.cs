@@ -68,7 +68,7 @@ public class SimpleRaycaster : BaseRaycaster
 					gameObject = raycastHit.collider.gameObject,
 					module = this,
 					distance = raycastHit.distance,
-					worldPosition = Vector3.zero,
+					worldPosition = raycastHit.point,
 					worldNormal = Vector3.zero,
 					screenPosition = eventData.position,
 					displayIndex = displayIndex,

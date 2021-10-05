@@ -11,6 +11,6 @@ public abstract class SimpleRayCastable : MonoBehaviour
 		SimpleRaycastSystem.OnRelease(this);
 	}
 
-	public abstract bool CheckIntersection (Ray ray);
+	public abstract bool CheckIntersection (Ray ray, out Vector3 hitPositiom);
 
 }

@@ -4,7 +4,7 @@ public class SimpleSphereCollider : SimpleRayCastable
 {
     public Vector3 center;
     public float raduis = 1;
-    public override bool CheckIntersection (Ray ray)
+    public override bool CheckIntersection (Ray ray, out Vector3 hitPosition)
     {
         var matrix = transform.localToWorldMatrix;
         var pos = matrix.MultiplyPoint3x4(center);
@@ -16,17 +16,22 @@ public class SimpleSphereCollider : SimpleRayCastable
         float c = Vector3.Dot(originCenterVector, originCenterVector) - raduis * raduis;
         
         float discriminant = b * b - 4 * a * c;
-
-        if (discriminant < 0) return false;
+      
+        if (discriminant < 0)
+        {
+            hitPosition = new Vector3();
+            return false;
+        }
         
         float numerator = -b - Mathf.Sqrt(discriminant);
-        
+        hitPosition = ray.origin + ray.direction * numerator;
         if (numerator > 0) return true;
         
         numerator = -b + Mathf.Sqrt(discriminant);
-        
+        hitPosition = ray.origin + ray.direction * numerator;
         if (numerator > 0) return true;
-
+      
+        hitPosition = new Vector3();
         return false;
     }
     

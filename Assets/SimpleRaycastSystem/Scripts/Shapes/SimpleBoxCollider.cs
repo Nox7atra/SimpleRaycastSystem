@@ -11,8 +11,9 @@ public class SimpleBoxCollider : SimpleRayCastable
         _transform = transform;
     }
 
-    public override bool CheckIntersection (Ray ray)
+    public override bool CheckIntersection (Ray ray, out Vector3 hitPosition)
     {
+        hitPosition = new Vector3();
         var matrix = transform.localToWorldMatrix;
         var rpos = ray.origin;
         var rdir =  ray.direction;
@@ -20,12 +21,12 @@ public class SimpleBoxCollider : SimpleRayCastable
         var halfScale = matrix.MultiplyVector(size / 2);
         Vector3 vmin =  pos - halfScale;
         Vector3 vmax =  pos + halfScale;
-        float t1 = (vmin.x - rpos.x)/rdir.x;
-        float t2 = (vmax.x - rpos.x)/rdir.x;
-        float t3 = (vmin.y - rpos.y)/rdir.y;
-        float t4 = (vmax.y - rpos.y)/rdir.y;
-        float t5 = (vmin.z - rpos.z)/rdir.z;
-        float t6 = (vmax.z - rpos.z)/rdir.z;
+        float t1 = (vmin.x - rpos.x) / rdir.x;
+        float t2 = (vmax.x - rpos.x) / rdir.x;
+        float t3 = (vmin.y - rpos.y) / rdir.y;
+        float t4 = (vmax.y - rpos.y) / rdir.y;
+        float t5 = (vmin.z - rpos.z) / rdir.z;
+        float t6 = (vmax.z - rpos.z) / rdir.z;
         float t7 = Mathf.Max(Mathf.Max(Mathf.Min(t1, t2), Mathf.Min(t3,t4)), Mathf.Min(t5, t6));
         float t8 = Mathf.Min(Mathf.Min(Mathf.Max(t1, t2), Mathf.Max(t3, t4)), Mathf.Max(t5, t6));
         return ! (t8 < 0 || t7 > t8);
