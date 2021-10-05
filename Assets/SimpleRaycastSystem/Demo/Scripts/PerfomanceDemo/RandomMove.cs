@@ -7,11 +7,12 @@ public class RandomMove : MonoBehaviour
    private const float MaxOffset = 0.1f;
    private IEnumerator Start ()
    {
-      var startPos = transform.position;
+      var tr = transform;
+      var startPos = tr.position;
       while (true)
       {
          yield return null;
-         transform.position = startPos + new Vector3(
+         tr.position = startPos + new Vector3(
             Random.Range(0, MaxOffset),
             Random.Range(0, MaxOffset),
             Random.Range(0, MaxOffset)

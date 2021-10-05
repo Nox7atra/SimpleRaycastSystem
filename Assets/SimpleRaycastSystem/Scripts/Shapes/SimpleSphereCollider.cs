@@ -6,8 +6,7 @@ public class SimpleSphereCollider : SimpleRayCastable
     public float raduis = 1;
     public override bool CheckIntersection (Ray ray, out Vector3 hitPosition)
     {
-        var matrix = transform.localToWorldMatrix;
-        var pos = matrix.MultiplyPoint3x4(center);
+        var pos =  transform.position + center;
         var originCenterVector = ray.origin - pos;
         var direction = ray.direction;
         
