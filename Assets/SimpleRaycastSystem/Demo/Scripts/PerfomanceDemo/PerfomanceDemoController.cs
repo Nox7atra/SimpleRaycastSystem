@@ -12,7 +12,7 @@ public class PerfomanceDemoController : MonoBehaviour
     [SerializeField] private Vector2 _Volume;
     private List<GameObject> _PhysicsObjects;
     private List<GameObject> _SimplePhysicsObject;
-    private bool _IsPhysicsShow;
+    [SerializeField] private bool _IsPhysicsShow;
     private void Start ()
     {
 	    _PhysicsObjects = new List<GameObject>();
