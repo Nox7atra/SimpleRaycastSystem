@@ -22,14 +22,14 @@ public class SimpleSphereCollider : SimpleRayCastable
             return false;
         }
         
-        float numerator = -b - Mathf.Sqrt(discriminant);
+        float numerator = -b + Mathf.Sqrt(discriminant);
         hitPosition = ray.origin + ray.direction * numerator;
         if (numerator > 0) return true;
         
-        numerator = -b + Mathf.Sqrt(discriminant);
+        numerator = -b - Mathf.Sqrt(discriminant);
         hitPosition = ray.origin + ray.direction * numerator;
         if (numerator > 0) return true;
-      
+        
         hitPosition = new Vector3();
         return false;
     }
