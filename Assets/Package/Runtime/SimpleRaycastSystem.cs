@@ -34,7 +34,8 @@ public static class SimpleRaycastSystem
         _CurrentHitsBuffer.Clear();
         foreach (var simpleRayCastable in _SimpleRayCastables)
         {
-            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition))
+            var layer = simpleRayCastable.gameObject.layer;
+            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition) &&mask == (mask | (1 << layer)))
             {
                 _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable, hitPosition));
             }
@@ -44,7 +45,7 @@ public static class SimpleRaycastSystem
             hits = null;
             return false;
         }
-        hits = _CurrentHitsBuffer.OrderBy(hit => hit.distance).Where(x=> mask == (mask | (1 << x.transform.gameObject.layer)));
+        hits = _CurrentHitsBuffer.OrderBy(hit => hit.distance);
         return true;
     }
     public static void Register (SimpleRayCastable simpleRayCastable)
