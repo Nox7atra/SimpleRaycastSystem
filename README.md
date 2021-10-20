@@ -2,6 +2,9 @@
 
 Простая система рейкастов для Unity3d. Частично поддерживает Enity Event System. Полезно для VR проектов с большими визуализациями данных, где не нужна физика коллизий, но нужно уметь что-то выбирать по лучу с помощью котроллера.
 
+Установка через Unity Package Manager / Add package from git URL:
+https://github.com/Nox7atra/SimpleRaycastSystem.git?path=/Assets/Package
+
 **SimpleRaycaster** - аналог PhysicsRaycaster из Unity Event System. Работает с системой событий, если повесить его на камеру то события из интерфейсов IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler и т.п. отработают корректно.
 
 **SimpleTransformRaycaster** - рейкастер пускающий луч от конкретного трансформа. Нужен в первую очередь для того чтобы использовать интерфейсы EventSystem в повесив данный компонент на VR контроллер. Известные проблемы - необходим кастомный Input Module для того, чтобы правильно отрабатывали события Drag, Up, Down, Click. На данный момент срабатывания идут от мыши, нужно расширить класс Standalone Input Module.
