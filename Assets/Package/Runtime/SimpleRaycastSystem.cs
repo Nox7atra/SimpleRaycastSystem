@@ -34,7 +34,7 @@ public static class SimpleRaycastSystem
         foreach (var simpleRayCastable in _SimpleRayCastables)
         {
             var layer = simpleRayCastable.gameObject.layer;
-            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition) &&mask == (mask | (1 << layer)))
+            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition))
             {
                 _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable, hitPosition));
             }
