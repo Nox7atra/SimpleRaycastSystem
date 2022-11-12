@@ -6,12 +6,8 @@ public static class SimpleRaycastSystem
 {
     private static List<SimpleRayCastable> _SimpleRayCastables = new List<SimpleRayCastable>();
     private static List<SimpleRaycastHit> _CurrentHitsBuffer = new List<SimpleRaycastHit>();
-
-    public static bool Raycast (Ray ray, out SimpleRaycastHit hit)
-    {
-        return Raycast(ray, out hit, LayerMask.NameToLayer("Default"));
-    }
-    public static bool Raycast (Ray ray, out SimpleRaycastHit hit, LayerMask mask)
+    
+    public static bool Raycast (Ray ray, out SimpleRaycastHit hit, LayerMask? mask = null)
     {
         IEnumerable<SimpleRaycastHit> hits;
         if (RaycastAll(ray, out hits, mask))
@@ -24,17 +20,14 @@ public static class SimpleRaycastSystem
             return false;
         }
     }
-    public static bool RaycastAll (Ray ray, out IEnumerable<SimpleRaycastHit> hits)
-    {
-        return RaycastAll(ray, out hits, LayerMask.NameToLayer("Default"));
-    }
-    public static bool RaycastAll (Ray ray, out IEnumerable<SimpleRaycastHit> hits, LayerMask mask)
+    public static bool RaycastAll(Ray ray, out IEnumerable<SimpleRaycastHit> hits, LayerMask? mask = null)
     {
         _CurrentHitsBuffer.Clear();
         foreach (var simpleRayCastable in _SimpleRayCastables)
         {
             var layer = simpleRayCastable.gameObject.layer;
-            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition))
+            if(mask.HasValue && mask.Value.value != layer) continue;
+            if (simpleRayCastable.CheckIntersection(ray, out var hitPosition) )
             {
                 _CurrentHitsBuffer.Add(new SimpleRaycastHit(ray, simpleRayCastable, hitPosition));
             }
